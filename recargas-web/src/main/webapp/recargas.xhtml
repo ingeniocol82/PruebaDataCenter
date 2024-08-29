@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Formulario de registo de recarga</title>
+    </h:head>
+    <h:body>
+        <p:panel
+            id="horizontal"
+            header="Formulario de Recargas"
+            toggleable="false"
+            toggleOrientation="horizontal">
+            
+            <h:messages globalOnly="true" infoStyle="color:darkgreen" errorStyle="color:darkred" />
+            
+            <h:form id="frmRecarga" style="width: auto; margin-left: 50px; ">
+            
+            <h:panelGrid id="panelFrmRecarga" columns="3" cellpadding="10">
+                <h:outputLabel id="NumeroMovilLabel" value="Número Móvil" />
+                <p:inputText id="NumeroMovilInput"
+                    value="#{recargasBean.mobileNumber}"
+                    required="true"
+                    style="width: 200px"/>
+                <p:message for="NumeroMovilInput"/>
+                
+                <h:outputLabel id="ValorRecargaLabel" value="Valor Recarga" />
+                <p:inputText id="ValorRecargaInput"
+                    value="#{recargasBean.rechargeAmount}"
+                    required="true"
+                    style="width: 200px"/>
+                <p:message for="ValorRecargaInput"/>
+                    
+                <h:outputLabel id="OperadorMovilLabel" value="Operador Móvil" />
+                <p:selectOneMenu 
+                      id="OperadorMovilInput" 
+                      value="#{recargasBean.mobileOperator}"
+                      required="true" 
+                      style="width: 250px">
+                           <f:selectItem itemValue="#{null}" itemLabel="seleccione"/>
+                           <f:selectItems value="#{recargasBean.mobileOperatorList}" var="operator" itemLabel="#{operator.mobileOperatorName}" itemValue="#{operator.mobileOperatorId}"  />
+                 </p:selectOneMenu>
+                 <p:message for="OperadorMovilInput"/>
+                 
+                 <h:outputLabel id="AgenteLabel" value="Agente Ventas" />
+                 <p:selectOneMenu 
+                      id="AgenteInput" 
+                      value="#{recargasBean.salesAgent}"
+                      required="true" 
+                      style="width: 250px">
+                           <f:selectItem itemValue="#{null}" itemLabel="seleccione"/>
+                           <f:selectItems value="#{recargasBean.salesAgenteList}" var="agent" itemLabel="#{agent.salesAgentFullName}" itemValue="#{agent.salesAgentCode}"  />
+                 </p:selectOneMenu>
+                 <p:message for="AgenteInput"/>
+            </h:panelGrid>
+            
+            <p:commandButton value="Realizar Recarga"
+                action="#{recargasBean.realizarRecarga}"
+                title="Recargar" update="horizontal">
+            </p:commandButton>
+            
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
